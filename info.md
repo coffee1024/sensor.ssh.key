@@ -12,7 +12,7 @@ sensor:
   - platform: ssh
       host: !secret proxmox_host
       name: 'NUC CPU Temp'
-      rsa_ket:''
+      rsa_key: '/root/config/rsa_id'
       username: !secret proxmox_user
       password: !secret proxmox_pass
       command: "sensors | grep 'Package id 0:' | cut -c17-20"
