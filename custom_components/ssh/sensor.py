@@ -16,7 +16,7 @@ import homeassistant.helpers.config_validation as cv
 from homeassistant.util import Throttle
 from homeassistant.components.sensor import PLATFORM_SCHEMA
 from homeassistant.const import (
-    CONF_NAME, CONF_HOST, CONF_USERNAME,CONF_RSA_KEY, CONF_PASSWORD,
+    CONF_NAME, CONF_HOST, CONF_USERNAME, CONF_PASSWORD,
     CONF_VALUE_TEMPLATE, CONF_COMMAND, CONF_PORT,
     STATE_UNKNOWN, CONF_UNIT_OF_MEASUREMENT)
 
@@ -35,7 +35,7 @@ PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend({
     vol.Required(CONF_HOST): cv.string,
     vol.Required(CONF_PASSWORD): cv.string,
     vol.Required(CONF_USERNAME): cv.string,
-    vol.Required(CONF_RSA_KEY): cv.string,
+    vol.Required('rsa_key'): cv.string,
     vol.Optional(CONF_PORT, default=DEFAULT_SSH_PORT): cv.port,
     vol.Required(CONF_COMMAND): cv.string,
     vol.Required(CONF_UNIT_OF_MEASUREMENT): cv.string,
@@ -58,7 +58,7 @@ class SSHSensor(Entity):
         self._host = config.get(CONF_HOST)
         self._username = config.get(CONF_USERNAME)
         self._password = config.get(CONF_PASSWORD)
-        self._rsa_key = config.get(CONF_RSA_KEY)
+        self._rsa_key = config.get('rsa_key')
         self._port = config.get(CONF_PORT)
         self._command = config.get(CONF_COMMAND)
         self._value_template = config.get(CONF_VALUE_TEMPLATE)
@@ -135,8 +135,8 @@ class SSHSensor(Entity):
 
         self._ssh = pxssh.pxssh()
         try:
-            self._ssh.login(self._host, self._username,
-                           password=self._password, port=self._port)
+            self._ssh.login(self._host, username=self._username,
+                           password=self._password, port=self._port,ssh_key=self._rsa_key)
             self._connected = True
         except exceptions.EOF:
             _LOGGER.error("Connection refused. SSH enabled?")
