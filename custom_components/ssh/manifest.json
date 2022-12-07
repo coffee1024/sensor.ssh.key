@@ -1,9 +1,9 @@
 {
         "domain": "ssh",
-        "name": "ssh sensor",
-        "documentation": "https://github.com/custom-components/sensor.ssh",
+        "name": "ssh sensor with rsa_key",
+        "documentation": "https://github.com/coffee1024/sensor.ssh.key",
         "requirements": ["pexpect==4.6.0"],
         "dependencies": [],
-        "codeowners": ["@jchasey"],
+        "codeowners": ["@jchasey,@coffee_java"],
         "version": "0.1.5"
 }
