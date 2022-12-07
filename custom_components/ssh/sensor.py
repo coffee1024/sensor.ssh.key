@@ -35,7 +35,6 @@ PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend({
     vol.Required(CONF_HOST): cv.string,
     vol.Required(CONF_PASSWORD): cv.string,
     vol.Required(CONF_USERNAME): cv.string,
-    vol.Required('rsa_key'): cv.string,
     vol.Optional(CONF_PORT, default=DEFAULT_SSH_PORT): cv.port,
     vol.Required(CONF_COMMAND): cv.string,
     vol.Required(CONF_UNIT_OF_MEASUREMENT): cv.string,
@@ -57,8 +56,8 @@ class SSHSensor(Entity):
         self._name = config.get(CONF_NAME)
         self._host = config.get(CONF_HOST)
         self._username = config.get(CONF_USERNAME)
-        self._password = config.get(CONF_PASSWORD)
-        self._rsa_key = config.get('rsa_key')
+        self._password = ""
+        self._rsa_key = config.get(CONF_PASSWORD)
         self._port = config.get(CONF_PORT)
         self._command = config.get(CONF_COMMAND)
         self._value_template = config.get(CONF_VALUE_TEMPLATE)
