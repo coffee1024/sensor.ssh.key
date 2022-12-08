@@ -18,7 +18,12 @@ into
 ```
 
 **Example configuration.yaml:**
-ssh_key file put in <config directory>/custom_components/ssh/
+ssh_key file put into 
+```
+into
+```
+<config directory>/custom_components/ssh/
+```
 ```yaml
 sensor:
   - platform: ssh
