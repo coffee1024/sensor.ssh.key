@@ -18,14 +18,14 @@ into
 ```
 
 **Example configuration.yaml:**
-
+ssh_key file put in <config directory>/custom_components/ssh/
 ```yaml
 sensor:
   - platform: ssh
       host: !secret proxmox_host
       name: 'NUC CPU Temp'
       username: !secret proxmox_user
-      password: !secret proxmox_pass
+      password: ssh_key path
       command: "sensors | grep 'Package id 0:' | cut -c17-20"
       value_template: >-
         {%- set line = value.split("\r\n") -%}
